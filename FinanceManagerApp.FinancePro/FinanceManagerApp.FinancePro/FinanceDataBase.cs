@@ -104,6 +104,7 @@ namespace FinanceManagerApp.FinancePro
         {
             initialFin = new InitializationFinans();
             initialFin.InsertCategories(DBName, _connectionString);
+            initialFin.InsertWallet(DBName, _connectionString,10);
         }
 
 

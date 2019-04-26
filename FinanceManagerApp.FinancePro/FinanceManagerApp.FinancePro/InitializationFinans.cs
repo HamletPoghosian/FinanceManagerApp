@@ -15,7 +15,7 @@ namespace FinanceManagerApp.FinancePro
         {
             Dictionary<string, Guid> categories = new Dictionary<string, Guid>
             {
-                { "Salary", Guid.NewGuid() },
+                { "Wear", Guid.NewGuid() },
                 { "Credit", Guid.NewGuid() },
                 { "Gasoline", Guid.NewGuid() },
                 { "Entertainment", Guid.NewGuid() },
@@ -40,9 +40,42 @@ namespace FinanceManagerApp.FinancePro
             };
 
         }
-        public void InsertWallet(string dbName, string sqlconnection)
+        public Guid[] SelectCategory(string dbName,string sqlconnection)
         {
+            using (con = new SqlConnection(sqlconnection))
+            {
+                string sqlQuerry = @"USE Finance select Id from Category";
+                con.OpenAsync().Wait();
+                using (SqlCommand com = new SqlCommand(sqlQuerry, con))
+                {
+                    SqlDataReader rd = com.ExecuteReader();
+                    
+                    Guid[] guid = new Guid[];
+                    int size = 0;
+                    while (rd.Read())
+                    {
+                        
+                        guid[size] = (Guid)rd["Id"];
+                        size++;
+                    }
+                    
+                    con.Close();
+                    return guid;
+                };
+            };
+            
+        }
+
+        public void InsertWallet(string dbName, string sqlconnection,int size)
+        {
+            Random rnd = new Random();
             StringBuilder sqlQuerry = new StringBuilder();
+            Guid[] categories = SelectCategory(dbName, sqlconnection);
+            for (int i = 0; i < size; i++)
+            {
+            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{rnd.Next(categories.Length-1)}', {rnd.Next(10, 50) * 100}, '{1990}-{12}-{31}');");
+
+            }
 
         }
     }

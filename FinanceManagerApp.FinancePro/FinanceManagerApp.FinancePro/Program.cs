@@ -15,6 +15,7 @@ namespace FinanceManagerApp.FinancePro
             finDB.CreateDB().Wait();
             finDB.CreateTable().Wait();
             finDB.InsertDB();
+            
         }
     }
 }
