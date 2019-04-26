@@ -40,7 +40,7 @@ namespace FinanceManagerApp.FinancePro
             };
 
         }
-        public Guid[] SelectCategory(string dbName,string sqlconnection)
+        public List<Guid> SelectCategory(string dbName,string sqlconnection)
         {
             using (con = new SqlConnection(sqlconnection))
             {
@@ -49,32 +49,26 @@ namespace FinanceManagerApp.FinancePro
                 using (SqlCommand com = new SqlCommand(sqlQuerry, con))
                 {
                     SqlDataReader rd = com.ExecuteReader();
+                    List<Guid> guid = new List<Guid>();
+                   
                     
-                    Guid[] guid = new Guid[];
-                    int size = 0;
                     while (rd.Read())
-                    {
-                        
-                        guid[size] = (Guid)rd["Id"];
-                        size++;
-                    }
-                    
+                    {                        
+                        guid.Add((Guid)rd["Id"]);                       
+                    }                    
                     con.Close();
                     return guid;
                 };
-            };
-            
+            };            
         }
-
         public void InsertWallet(string dbName, string sqlconnection,int size)
         {
             Random rnd = new Random();
             StringBuilder sqlQuerry = new StringBuilder();
-            Guid[] categories = SelectCategory(dbName, sqlconnection);
+            List<Guid> categories = SelectCategory(dbName, sqlconnection);
             for (int i = 0; i < size; i++)
-            {
-            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{rnd.Next(categories.Length-1)}', {rnd.Next(10, 50) * 100}, '{rnd.Next(2010,2019)}-{1,13}-{1,32}');");
-
+            {                
+            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{categories[rnd.Next(categories.Count-1)]}', {rnd.Next(10, 50) * 100}, '{rnd.Next(2010,2019)}-{1,13}-{1,32}');");
             }
 
         }
