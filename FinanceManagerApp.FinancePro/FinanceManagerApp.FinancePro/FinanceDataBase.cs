@@ -12,12 +12,13 @@ namespace FinanceManagerApp.FinancePro
     {
         private readonly string _connectionString = @"Data Source = (localdb)\MSSQLLocalDB;Integrated Security = True; Pooling=False";
         private SqlConnection connec;
-
-        public FinanceDataBase()
+        InitializationFinans initialFin;
+        public string DBName { get; set; }
+        public FinanceDataBase(string DatabaseName)
         {
-
+            DBName = DatabaseName;
         }
-        public async Task CreateDB(string DBName)
+        public async Task CreateDB()
         {
             string createQuery = @"USE [master]
              IF NOT EXISTS(SELECT name FROM master.dbo.sysdatabases WHERE name = '" + DBName + "')" +
@@ -51,16 +52,16 @@ namespace FinanceManagerApp.FinancePro
         {
             StringBuilder stringTable = new StringBuilder();
             stringTable.AppendLine(@" USE Finance
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Category' )
-          CREATE TABLE     [Category] (
+                    IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Category' )
+                    CREATE TABLE     [Category] (
                     [Id]    UNIQUEIDENTIFIER NOT NULL,
                     [Title] NVARCHAR (MAX)   NOT NULL,
                     CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([Id] ASC)
                    );
 ");
                             stringTable.AppendLine(@"USE Finance
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Wallet' )
-CREATE TABLE        [Wallet] (
+                    IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Wallet' )
+                    CREATE TABLE        [Wallet] (
                     [Id]          UNIQUEIDENTIFIER NOT NULL,
                     [CategoryId]  UNIQUEIDENTIFIER NOT NULL,
                     [Amount]      MONEY            NOT NULL,
@@ -99,6 +100,12 @@ CREATE TABLE        [Wallet] (
                 throw;
             }
         }
+        public void InsertDB()
+        {
+            initialFin = new InitializationFinans();
+            initialFin.InsertCategories(DBName, _connectionString);
+        }
+
 
         public void Dispose()
         {
