@@ -54,7 +54,7 @@ namespace FinanceManagerApp.FinancePro
             stringTable.AppendLine(@" USE Finance
                     IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Category' )
                     CREATE TABLE     [Category] (
-                    [Id]    UNIQUEIDENTIFIER NOT NULL,
+                    [Id]    UNIQUEIDENTIFIER NOT NULL default newid(),
                     [Title] NVARCHAR (MAX)   NOT NULL,
                     CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([Id] ASC)
                    );
@@ -62,8 +62,8 @@ namespace FinanceManagerApp.FinancePro
                             stringTable.AppendLine(@"USE Finance
                     IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Wallet' )
                     CREATE TABLE        [Wallet] (
-                    [Id]          UNIQUEIDENTIFIER NOT NULL,
-                    [CategoryId]  UNIQUEIDENTIFIER NOT NULL,
+                    [Id]          UNIQUEIDENTIFIER NOT NULL default newid(),
+                    [CategoryId]  UNIQUEIDENTIFIER NOT NULL ,
                     [Amount]      MONEY            NOT NULL,
                     [Comment]     NVARCHAR (MAX)   NULL,
                     [Day]         DATETIME2 (7)    NOT NULL,

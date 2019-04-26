@@ -71,6 +71,7 @@ namespace FinanceManagerApp.FinancePro
             sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{categories[rnd.Next(categories.Count-1)]}', {rnd.Next(10, 50) * 100}, '{rnd.Next(2010,2019)}-{1,13}-{1,32}');");
             }
 
+
         }
     }
 }
