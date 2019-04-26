@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -49,24 +50,25 @@ namespace FinanceManagerApp.FinancePro
         public async Task CreateTable()
         {
             StringBuilder stringTable = new StringBuilder();
-            stringTable.AppendLine(@"USE Finance
-             CREATE TABLE [dbo].[Category] (
-    [Id]    UNIQUEIDENTIFIER NOT NULL,
-    [Title] NVARCHAR (MAX)   NOT NULL,
-    CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([Id] ASC)
-   );");
-            stringTable.AppendLine(@"CREATE TABLE [dbo].[Wallet] (
-    [Id]          UNIQUEIDENTIFIER NOT NULL,
-    [CategoryId]  UNIQUEIDENTIFIER NOT NULL,
-    [Amount]      MONEY            NOT NULL,
-    [Comment]     NVARCHAR (MAX)   NULL,
-    [Day]         DATETIME2 (7)    NOT NULL,
-    [DateCreated] DATETIME2 (7)    CONSTRAINT [DF_Wallet_DateCreated] DEFAULT (getutcdate()) NOT NULL,
-    CONSTRAINT [PK_Wallet] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Wallet_Category] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Category] ([Id]) ON DELETE CASCADE ON UPDATE CASCADE
-);");
-
-
+            stringTable.AppendLine(@" USE Finance
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Category' )
+          CREATE TABLE     [Category] (
+                    [Id]    UNIQUEIDENTIFIER NOT NULL,
+                    [Title] NVARCHAR (MAX)   NOT NULL,
+                    CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED ([Id] ASC)
+                   );
+");
+                            stringTable.AppendLine(@"USE Finance
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Wallet' )
+CREATE TABLE        [Wallet] (
+                    [Id]          UNIQUEIDENTIFIER NOT NULL,
+                    [CategoryId]  UNIQUEIDENTIFIER NOT NULL,
+                    [Amount]      MONEY            NOT NULL,
+                    [Comment]     NVARCHAR (MAX)   NULL,
+                    [Day]         DATETIME2 (7)    NOT NULL,
+                    [DateCreated] DATETIME2 (7)    CONSTRAINT [DF_Wallet_DateCreated] DEFAULT (getutcdate()) NOT NULL,
+                    CONSTRAINT [PK_Wallet] PRIMARY KEY CLUSTERED ([Id] ASC),
+                    CONSTRAINT [FK_Wallet_Category] FOREIGN KEY ([CategoryId]) REFERENCES Category(Id) ON DELETE CASCADE ON UPDATE CASCADE);");
             try
             {
                 using (connec = new SqlConnection(_connectionString))
@@ -87,8 +89,13 @@ namespace FinanceManagerApp.FinancePro
             {
                 Console.WriteLine("Chech You DB");
             }
-            catch (Exception)
+            catch (DbException)
             {
+                Console.WriteLine("Chech you Db");
+            }
+            catch (Exception ex )
+            {
+                Console.WriteLine(ex.Message);
                 throw;
             }
         }
