@@ -73,7 +73,7 @@ namespace FinanceManagerApp.FinancePro
             Guid[] categories = SelectCategory(dbName, sqlconnection);
             for (int i = 0; i < size; i++)
             {
-            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{rnd.Next(categories.Length-1)}', {rnd.Next(10, 50) * 100}, '{1990}-{12}-{31}');");
+            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{rnd.Next(categories.Length-1)}', {rnd.Next(10, 50) * 100}, '{rnd.Next(2010,2019)}-{1,13}-{1,32}');");
 
             }
 
