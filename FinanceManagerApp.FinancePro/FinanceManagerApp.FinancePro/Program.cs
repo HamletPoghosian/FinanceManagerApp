@@ -12,7 +12,7 @@ namespace FinanceManagerApp.FinancePro
 
         {
             FinanceDataBase finDB = new FinanceDataBase();
-            finDB.CreateDB("Finance");
+            finDB.CreateDB("Finance").Wait();
         }
     }
 }

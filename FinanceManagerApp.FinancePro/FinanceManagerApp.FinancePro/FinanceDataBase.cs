@@ -18,7 +18,9 @@ namespace FinanceManagerApp.FinancePro
         }
         public async Task CreateDB(string DBName)
         {
-            string createQuery= $"USE [master]  CREATE DATABASE[{DBName}];";
+            string createQuery= @"USE [master]
+             IF NOT EXISTS(SELECT name FROM master.dbo.sysdatabases WHERE name = '"+ DBName + "')" +
+             "CREATE DATABASE[" + DBName + "];";
             try
             {
                 using (connec = new SqlConnection(_connectionString))
@@ -26,8 +28,7 @@ namespace FinanceManagerApp.FinancePro
                     connec.Open();
                     using (SqlCommand comm = new SqlCommand(createQuery, connec))
                     {
-                        comm.ExecuteNonQueryAsync().Wait();
-                       
+                        comm.ExecuteNonQueryAsync().Wait();                       
                         connec.Close();
                     };
                 };
