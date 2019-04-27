@@ -24,5 +24,10 @@ namespace FinanceMeneger
         {
             InitializeComponent();
         }
+
+        private void TextBox_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
