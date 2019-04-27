@@ -85,7 +85,8 @@ namespace FinanceManagerApp.FinancePro
         {            
             StringBuilder sqlQuerry = new StringBuilder();
             Guid value = SelectCategory(dbName, sqlconnection, category);
-            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount],[Comment], [Day],[DateCreated]) VALUES('{value}', {coin}, '{comment}','{data}','{DateTime.Now}');");
+            sqlQuerry.Append(@"USE Finance ");
+            sqlQuerry.AppendLine($"INSERT INTO Wallet ([CategoryId], [Amount],[Comment], [Day],[DateCreated]) VALUES('{value}', {coin}, '{comment}','{data}','{DateTime.Now}');");
             using (con = new SqlConnection(sqlconnection))
             {
                 con.OpenAsync().Wait();

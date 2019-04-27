@@ -73,7 +73,7 @@ namespace FinanceManagerApp.FinancePro
                     CREATE TABLE        [Wallet] (
                     [Id]          UNIQUEIDENTIFIER NOT NULL default newid(),
                     [CategoryId]  UNIQUEIDENTIFIER NOT NULL ,
-                    [Amount]      MONEY            NOT NULL,
+                    [Amount]      INT            NOT NULL,
                     [Comment]     NVARCHAR (MAX)   NULL,
                     [Day]         DATETIME2 (7)    NOT NULL,
                     [DateCreated] DATETIME2 (7)    CONSTRAINT [DF_Wallet_DateCreated] DEFAULT (getutcdate()) NOT NULL,
