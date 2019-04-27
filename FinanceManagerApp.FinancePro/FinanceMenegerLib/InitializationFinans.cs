@@ -61,17 +61,11 @@ namespace FinanceManagerApp.FinancePro
                 };
             };
         }
-        public void InsertWallet(string dbName, string sqlconnection, int size)
+        public void InsertWallet(string dbName, string sqlconnection, int coin, string category, string comment, DateTime data)
         {
             Random rnd = new Random();
             StringBuilder sqlQuerry = new StringBuilder();
-            
-            for (int i = 0; i < size; i++)
-            {
-               // sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{categories[rnd.Next(categories.Count - 1)]}', {rnd.Next(10, 50) * 100}, '{rnd.Next(2010, 2019)}-{1,13}-{1,32}');");
-            }
-
-
+            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount],[Comment], [Day],[DateCreated]) VALUES('{category.ToString()}', {coin}, '{comment}','{data}','{DateTime.Now}');");
         }
     }
 }

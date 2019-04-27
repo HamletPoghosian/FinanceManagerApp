@@ -22,7 +22,7 @@
         <TextBox x:Name="textVomment"  HorizontalAlignment="Left" Height="80" Margin="2,193,0,0" TextWrapping="Wrap" Text="Մեկնաբանություն" VerticalAlignment="Top" Width="264" Grid.Column="1"/>
         <Calendar x:Name="Calendar" HorizontalAlignment="Left" Height="164" Margin="0,361,0,0" VerticalAlignment="Top" Width="175" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Today}"/>
         <TextBox x:Name="textCalendar" Text="{Binding ElementName=Calendar,Path=SelectedDate,StringFormat=d}" Grid.Column="1" HorizontalAlignment="Left" Height="65" Margin="2,291,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="266"/>
-        <Button x:Name="buttonSend" Content="Գրանցել" HorizontalAlignment="Left" Height="75" Margin="30,450,0,0" VerticalAlignment="Top" Width="175" FontSize="20"/>
+        <Button x:Name="buttonSend" Content="Գրանցել" HorizontalAlignment="Left" Height="75" Margin="30,450,0,0" VerticalAlignment="Top" Width="175" FontSize="20" Click="ButtonSend_Click"/>
         <Expander x:Name="expendGraf" Grid.Column="2" Header="Վիճակագրություն Գրաֆիկ ըստ ծախսերի&#xD;&#xA;" Height="101" Margin="10,35,231,0" VerticalAlignment="Top" FontSize="20">
             <Grid Background="#FFE5E5E5" Margin="0,0,-222,0" Height="214">
                 <Canvas x:Name="CanvasGraf" HorizontalAlignment="Left" Height="194" Margin="10,10,0,0" VerticalAlignment="Top" Width="580"/>

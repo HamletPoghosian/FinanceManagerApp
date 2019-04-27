@@ -46,5 +46,10 @@ namespace FinanceMeneger
         {
 
         }
+
+        private void ButtonSend_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
