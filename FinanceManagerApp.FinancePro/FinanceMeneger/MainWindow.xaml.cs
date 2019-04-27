@@ -51,7 +51,7 @@ namespace FinanceMeneger
         {
             initial = new InitializationFinans();
 
-            initial.InsertWallet(dataBase.DBName, dataBase.ConnectionString,int.Parse(textnumber.Text), comboType.SelectedValue.ToString(), textComment.Text, DateTime.Parse(textComment.Text));
+            initial.InsertWallet(dataBase.DBName, dataBase.ConnectionString,int.Parse(textnumber.Text), comboType.SelectedValue.ToString(), textComment.Text, DateTime.Parse(textCalendar.Text));
         }
     }
 }

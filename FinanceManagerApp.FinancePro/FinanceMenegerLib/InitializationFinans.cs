@@ -60,10 +60,32 @@ namespace FinanceManagerApp.FinancePro
                 };
             };
         }
+        public Guid SelectCategory(string dbName, string sqlconnection,string category)
+        {
+            using (con = new SqlConnection(sqlconnection))
+            {
+                string sqlQuerry = @"USE Finance select Id from Category Where Title='"+ category + "'";
+                con.OpenAsync().Wait();
+                using (SqlCommand com = new SqlCommand(sqlQuerry, con))
+                {
+                    SqlDataReader rd = com.ExecuteReader();
+                    Guid value = new Guid();
+
+                    while (rd.Read())
+                    {
+                        value =(Guid)rd["Id"];
+                        com.Clone();
+                    }
+                   
+                    return value;
+                };
+            };
+        }
         public void InsertWallet(string dbName, string sqlconnection, int coin, string category, string comment, DateTime data)
         {            
             StringBuilder sqlQuerry = new StringBuilder();
-            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount],[Comment], [Day],[DateCreated]) VALUES('{category.ToString()}', {coin}, '{comment}','{data}','{DateTime.Now}');");
+            Guid value = SelectCategory(dbName, sqlconnection, category);
+            sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount],[Comment], [Day],[DateCreated]) VALUES('{value}', {coin}, '{comment}','{data}','{DateTime.Now}');");
             using (con = new SqlConnection(sqlconnection))
             {
                 con.OpenAsync().Wait();
