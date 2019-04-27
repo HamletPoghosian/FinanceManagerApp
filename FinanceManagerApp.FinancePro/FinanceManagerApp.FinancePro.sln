@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceManagerApp.FinancePro", "FinanceManagerApp.FinancePro\FinanceManagerApp.FinancePro.csproj", "{848B72E9-5732-4875-B21B-FFED877E2D8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceMeneger", "FinanceMeneger\FinanceMeneger.csproj", "{52D63A2A-CC79-4A60-8D79-35FC5F60BD73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceMenegerFunctionLib", "FinanceMenegerLib\FinanceMenegerFunctionLib.csproj", "{7AC6BE2D-CD93-4BEE-939B-6CF5046EE902}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{848B72E9-5732-4875-B21B-FFED877E2D8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{848B72E9-5732-4875-B21B-FFED877E2D8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{848B72E9-5732-4875-B21B-FFED877E2D8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{848B72E9-5732-4875-B21B-FFED877E2D8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52D63A2A-CC79-4A60-8D79-35FC5F60BD73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D63A2A-CC79-4A60-8D79-35FC5F60BD73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D63A2A-CC79-4A60-8D79-35FC5F60BD73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D63A2A-CC79-4A60-8D79-35FC5F60BD73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC6BE2D-CD93-4BEE-939B-6CF5046EE902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC6BE2D-CD93-4BEE-939B-6CF5046EE902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC6BE2D-CD93-4BEE-939B-6CF5046EE902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC6BE2D-CD93-4BEE-939B-6CF5046EE902}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
