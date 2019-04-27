@@ -49,15 +49,14 @@ namespace FinanceManagerApp.FinancePro
                 using (SqlCommand com = new SqlCommand(sqlQuerry, con))
                 {
                     SqlDataReader rd = com.ExecuteReader();
-                    List<string> guid = new List<string>();
-
+                    List<string> CategoryValue = new List<string>();
 
                     while (rd.Read())
                     {
-                        guid.Add(rd["Title"].ToString());
+                        CategoryValue.Add(rd["Title"].ToString());
                     }
                     con.Close();
-                    return guid;
+                    return CategoryValue;
                 };
             };
         }
