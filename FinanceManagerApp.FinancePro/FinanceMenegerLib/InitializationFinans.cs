@@ -35,35 +35,26 @@ namespace FinanceManagerApp.FinancePro
                 con.OpenAsync().Wait();
                 using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
                 {
-                    SqlDataReader rd = com.ExecuteReader();
-                    if (rd.FieldCount < 0)
-                    {
-                        com.ExecuteNonQueryAsync().Wait();
-                        con.Close();
-                    }
-                    else
-                    {
-                        con.Close();
-                        return;
-                    }
+                    com.ExecuteNonQueryAsync().Wait();
+                    con.Close();
                 };
             };
         }
-        public List<Guid> SelectCategory(string dbName, string sqlconnection)
+        public List<string> SelectCategory(string dbName, string sqlconnection)
         {
             using (con = new SqlConnection(sqlconnection))
             {
-                string sqlQuerry = @"USE Finance select Id from Category";
+                string sqlQuerry = @"USE Finance select Title from Category";
                 con.OpenAsync().Wait();
                 using (SqlCommand com = new SqlCommand(sqlQuerry, con))
                 {
                     SqlDataReader rd = com.ExecuteReader();
-                    List<Guid> guid = new List<Guid>();
+                    List<string> guid = new List<string>();
 
 
                     while (rd.Read())
                     {
-                        guid.Add((Guid)rd["Id"]);
+                        guid.Add(rd["Title"].ToString());
                     }
                     con.Close();
                     return guid;
@@ -74,10 +65,10 @@ namespace FinanceManagerApp.FinancePro
         {
             Random rnd = new Random();
             StringBuilder sqlQuerry = new StringBuilder();
-            List<Guid> categories = SelectCategory(dbName, sqlconnection);
+            
             for (int i = 0; i < size; i++)
             {
-                sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{categories[rnd.Next(categories.Count - 1)]}', {rnd.Next(10, 50) * 100}, '{rnd.Next(2010, 2019)}-{1,13}-{1,32}');");
+               // sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount], [Day]) VALUES('{categories[rnd.Next(categories.Count - 1)]}', {rnd.Next(10, 50) * 100}, '{rnd.Next(2010, 2019)}-{1,13}-{1,32}');");
             }
 
 

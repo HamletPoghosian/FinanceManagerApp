@@ -18,7 +18,7 @@
         <Label  Grid.Column="0" Content="Մեկնաբանություն" HorizontalAlignment="Left" Margin="32,193,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,-0.596" FontSize="20" Height="37" Width="185"/>
         <Label  Grid.Column="0" Content="Գործարքի օրը" HorizontalAlignment="Left" Margin="32,278,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.491,1.811" Height="37" Width="150"/>
         <TextBox x:Name="textnumber"   HorizontalAlignment="Left" Height="44" Margin="0,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="264" RenderTransformOrigin="1.89,0.455" Grid.Column="1"/>
-        <ComboBox x:Name="comboType" HorizontalAlignment="Left" Height="36" Margin="0,122,0,0" VerticalAlignment="Top" Width="264" Grid.Column="1"/>
+        <ComboBox x:Name="comboType" HorizontalAlignment="Left" Height="36" Margin="0,122,0,0" VerticalAlignment="Top" Width="264" Grid.Column="1" SelectionChanged="ComboType_SelectionChanged"/>
         <TextBox x:Name="textVomment"  HorizontalAlignment="Left" Height="80" Margin="2,193,0,0" TextWrapping="Wrap" Text="Մեկնաբանություն" VerticalAlignment="Top" Width="264" Grid.Column="1"/>
         <Calendar x:Name="Calendar" HorizontalAlignment="Left" Height="164" Margin="0,361,0,0" VerticalAlignment="Top" Width="175" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Today}"/>
         <TextBox x:Name="textCalendar" Text="{Binding ElementName=Calendar,Path=SelectedDate,StringFormat=d}" Grid.Column="1" HorizontalAlignment="Left" Height="65" Margin="2,291,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="266"/>

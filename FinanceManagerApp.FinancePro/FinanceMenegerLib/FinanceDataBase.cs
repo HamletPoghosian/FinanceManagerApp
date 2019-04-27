@@ -14,6 +14,13 @@ namespace FinanceManagerApp.FinancePro
         private SqlConnection connec;
         InitializationFinans initialFin;
         public string DBName { get; set; }
+        public string ConnectionString
+        {
+            get
+            {
+                return _connectionString;
+            }
+        }
         public FinanceDataBase(string DatabaseName)
         {
             DBName = DatabaseName;
@@ -48,8 +55,10 @@ namespace FinanceManagerApp.FinancePro
                 throw;
             }
         }
+    
         public async Task CreateTable()
         {
+
             StringBuilder stringTable = new StringBuilder();
             stringTable.AppendLine(@" USE Finance
                     IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Category' )
@@ -74,12 +83,12 @@ namespace FinanceManagerApp.FinancePro
             {
                 using (connec = new SqlConnection(_connectionString))
                 {
+                    initialFin = new InitializationFinans();
                     connec.Open();
                     using (SqlCommand comm = new SqlCommand(stringTable.ToString(), connec))
                     {
                         comm.ExecuteNonQueryAsync().Wait();
-                        initialFin = new InitializationFinans();
-                        initialFin.InsertCategories(DBName, _connectionString);
+                        initialFin.InsertCategories(DBName, ConnectionString);
                         connec.Close();
                     };
                 };
@@ -104,7 +113,7 @@ namespace FinanceManagerApp.FinancePro
         }
         public void InsertDB()
         {
-            
+
             initialFin.InsertWallet(DBName, _connectionString, 10);
         }
 

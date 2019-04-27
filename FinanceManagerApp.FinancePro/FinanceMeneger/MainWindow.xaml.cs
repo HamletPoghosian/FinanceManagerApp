@@ -21,16 +21,28 @@ namespace FinanceMeneger
     /// </summary>
     public partial class MainWindow : Window
     {
+        InitializationFinans initial;
+        FinanceDataBase dataBase;
         public MainWindow()
         {
             InitializeComponent();
-            FinanceDataBase dataBase = new FinanceDataBase("Finance");
+            dataBase = new FinanceDataBase("Finance");
+            initial = new InitializationFinans();
             dataBase.CreateDB().Wait();
-            dataBase.CreateTable().Wait();
+            if (comboType.Items.Count<1)
+            {
+                dataBase.CreateTable().Wait();
+                comboType.ItemsSource = initial.SelectCategory(dataBase.DBName, dataBase.ConnectionString);
+            }
 
         }
 
         private void TextBox_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
