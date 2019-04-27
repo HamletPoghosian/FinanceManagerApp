@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinanceManagerApp.FinancePro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace FinanceMeneger
         public MainWindow()
         {
             InitializeComponent();
+            FinanceDataBase dataBase = new FinanceDataBase("Finance");
+            dataBase.CreateDB().Wait();
+            dataBase.CreateTable().Wait();
+
         }
 
         private void TextBox_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)

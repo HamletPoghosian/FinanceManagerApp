@@ -13,15 +13,16 @@ namespace FinanceManagerApp.FinancePro
 
         public void InsertCategories(string dbName, string sqlconnection)
         {
+
             Dictionary<string, Guid> categories = new Dictionary<string, Guid>
             {
-                { "Wear", Guid.NewGuid() },
+                { "Salary", Guid.NewGuid() },
+                { "Wear",   Guid.NewGuid() },
                 { "Credit", Guid.NewGuid() },
                 { "Gasoline", Guid.NewGuid() },
                 { "Entertainment", Guid.NewGuid() },
-                { "Food", Guid.NewGuid() },
-                { "Other", Guid.NewGuid() }
-
+                { "Food",   Guid.NewGuid() },
+                { "Other",  Guid.NewGuid() }
             };
             StringBuilder sqlQuerry = new StringBuilder();
             sqlQuerry.AppendLine($"USE [{dbName}];");
@@ -34,11 +35,19 @@ namespace FinanceManagerApp.FinancePro
                 con.OpenAsync().Wait();
                 using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
                 {
-                    com.ExecuteNonQueryAsync().Wait();
-                    con.Close();
+                    SqlDataReader rd = com.ExecuteReader();
+                    if (rd.FieldCount < 0)
+                    {
+                        com.ExecuteNonQueryAsync().Wait();
+                        con.Close();
+                    }
+                    else
+                    {
+                        con.Close();
+                        return;
+                    }
                 };
             };
-
         }
         public List<Guid> SelectCategory(string dbName, string sqlconnection)
         {

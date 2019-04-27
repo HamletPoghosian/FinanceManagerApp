@@ -78,6 +78,8 @@ namespace FinanceManagerApp.FinancePro
                     using (SqlCommand comm = new SqlCommand(stringTable.ToString(), connec))
                     {
                         comm.ExecuteNonQueryAsync().Wait();
+                        initialFin = new InitializationFinans();
+                        initialFin.InsertCategories(DBName, _connectionString);
                         connec.Close();
                     };
                 };
@@ -102,8 +104,7 @@ namespace FinanceManagerApp.FinancePro
         }
         public void InsertDB()
         {
-            initialFin = new InitializationFinans();
-            initialFin.InsertCategories(DBName, _connectionString);
+            
             initialFin.InsertWallet(DBName, _connectionString, 10);
         }
 
