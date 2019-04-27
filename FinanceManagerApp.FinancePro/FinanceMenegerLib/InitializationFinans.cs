@@ -62,10 +62,18 @@ namespace FinanceManagerApp.FinancePro
             };
         }
         public void InsertWallet(string dbName, string sqlconnection, int coin, string category, string comment, DateTime data)
-        {
-            Random rnd = new Random();
+        {            
             StringBuilder sqlQuerry = new StringBuilder();
             sqlQuerry.AppendLine($"INSERT INTO [Wallet] ([CategoryId], [Amount],[Comment], [Day],[DateCreated]) VALUES('{category.ToString()}', {coin}, '{comment}','{data}','{DateTime.Now}');");
+            using (con = new SqlConnection(sqlconnection))
+            {
+                con.OpenAsync().Wait();
+                using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
+                {
+                    com.ExecuteNonQueryAsync().Wait();
+                    con.Close();
+                };
+            };
         }
     }
 }
