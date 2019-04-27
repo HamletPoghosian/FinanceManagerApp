@@ -111,13 +111,6 @@ namespace FinanceManagerApp.FinancePro
                 throw;
             }
         }
-        public void InsertDB()
-        {
-
-            initialFin.InsertWallet(DBName, _connectionString, 10);
-        }
-
-
         public void Dispose()
         {
             connec.Dispose();

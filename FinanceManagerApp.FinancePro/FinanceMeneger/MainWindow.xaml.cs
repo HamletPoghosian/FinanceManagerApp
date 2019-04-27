@@ -50,8 +50,8 @@ namespace FinanceMeneger
         private void ButtonSend_Click(object sender, RoutedEventArgs e)
         {
             initial = new InitializationFinans();
-            
-            initial.InsertWallet(dataBase.DBName,dataBase.ConnectionString,textnumber.Text,comboType.SelectedValue.ToString(),text)
+
+            initial.InsertWallet(dataBase.DBName, dataBase.ConnectionString,int.Parse(textnumber.Text), comboType.SelectedValue.ToString(), textComment.Text, DateTime.Parse(textComment.Text));
         }
     }
 }
