@@ -88,7 +88,7 @@ namespace FinanceManagerApp.FinancePro
                     using (SqlCommand comm = new SqlCommand(stringTable.ToString(), connec))
                     {
                         comm.ExecuteNonQueryAsync().Wait();
-                        initialFin.InsertCategories(DBName, ConnectionString);
+                        
                         connec.Close();
                     };
                 };
