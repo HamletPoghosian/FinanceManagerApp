@@ -157,6 +157,43 @@ SELECT      Wallet.Day,
                 };
             };
         }
+        public string SelectByTitle(string dbName, string sqlconnection, DateTime dataFirst, DateTime dataLast)
+        {
+            StringBuilder sqlQuerry = new StringBuilder();
+            using (con = new SqlConnection(sqlconnection))
+            {
+                sqlQuerry.Append(@" use Finance; 
+
+WITH  w(Title,tit) 
+as 
+(
+select count(Category.Title),Category.Title
+ FROM      Wallet
+	left join Category
+	ON Wallet.CategoryId=Category.Id
+   group by Category.Title
+   )
+select TOP(1) w.tit
+   from w
+   Order by Title desc
+   
+ ");
+                con.OpenAsync().Wait();
+                string BuyValue = string.Empty;
+                using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
+                {
+                    SqlDataReader rd = com.ExecuteReader();
+
+                    while (rd.Read())
+                    {
+                        BuyValue =rd[0].ToString();
+                        break;
+                    }
+                    con.Close();
+                    return BuyValue;
+                };
+            };
+        }
     }
 }
 

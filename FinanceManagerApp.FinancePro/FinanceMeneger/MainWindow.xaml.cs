@@ -69,6 +69,7 @@ namespace FinanceMeneger
             initial = new InitializationFinans();
           txtMoney.Text= initial.SelectBySolid(dataBase.DBName,dataBase.ConnectionString, DateTime.Parse(DataFirst.SelectedDate.ToString()),DateTime.Parse( DataLast.SelectedDate.ToString()));
           TxtDay.Text= initial.SelectByDay(dataBase.DBName, dataBase.ConnectionString, DateTime.Parse(DataFirst.SelectedDate.ToString()), DateTime.Parse(DataLast.SelectedDate.ToString()));
+            txtType.Text = initial.SelectByTitle(dataBase.DBName, dataBase.ConnectionString, DateTime.Parse(DataFirst.SelectedDate.ToString()), DateTime.Parse(DataLast.SelectedDate.ToString()));
         }
     }
 }
