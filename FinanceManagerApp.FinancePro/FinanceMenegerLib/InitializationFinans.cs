@@ -98,7 +98,7 @@ namespace FinanceManagerApp.FinancePro
             };
         }
 
-        public List<string> SelectBuy(string dbName, string sqlconnection,DateTime dataFirst,DateTime dataLast)
+        public string SelectBySolid(string dbName, string sqlconnection,DateTime dataFirst,DateTime dataLast)
         {
             StringBuilder sqlQuerry = new StringBuilder();
             using (con = new SqlConnection(sqlconnection))
@@ -106,22 +106,48 @@ namespace FinanceManagerApp.FinancePro
                  sqlQuerry.Append( @"use Finance
                                     select sum(Amount)
                                     from  Wallet 
-                                    where Wallet.Day between '"+dataFirst+ "'AND '"+ dataLast +"'" );
+                                    where Wallet.Day between '"+dataFirst+ "'AND '"+ dataLast +"' " );
                
-                sqlQuerry.Append(@" SELECT      Wallet.Day           
+               /* sqlQuerry.Append(@" SELECT      Wallet.Day           
     FROM      Wallet 
     GROUP BY Wallet.Day
-    ORDER BY Wallet.Day ");
+    ORDER BY Wallet.Day ");*/
                 con.OpenAsync().Wait();
+                string BuyValue=string.Empty;
                 using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
                 {
                     SqlDataReader rd = com.ExecuteReader();
-                    List<string> BuyValue = new List<string>();
 
                     while (rd.Read())
                     {
-                        BuyValue.Add(rd["Amount"].ToString());
-                        BuyValue.Add(rd["Day"].ToString());
+                        BuyValue=rd[0].ToString();                       
+                        break;
+                    }
+                    con.Close();
+                    return BuyValue;
+                };
+            };
+        }
+
+        public string SelectByDay(string dbName, string sqlconnection, DateTime dataFirst, DateTime dataLast)
+        {
+            StringBuilder sqlQuerry = new StringBuilder();
+            using (con = new SqlConnection(sqlconnection))
+            {                
+                 sqlQuerry.Append(@" use Finance
+SELECT      Wallet.Day           
+     FROM      Wallet 
+     GROUP BY Wallet.Day
+     ORDER BY Wallet.Day ");
+                con.OpenAsync().Wait();
+                string BuyValue = string.Empty;
+                using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
+                {
+                    SqlDataReader rd = com.ExecuteReader();
+
+                    while (rd.Read())
+                    {
+                        BuyValue = rd[0].ToString();
                         break;
                     }
                     con.Close();

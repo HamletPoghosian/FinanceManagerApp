@@ -67,7 +67,8 @@ namespace FinanceMeneger
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
             initial = new InitializationFinans();
-            initial.SelectBuy(dataBase.DBName,dataBase.ConnectionString, DateTime.Parse(DataFirst.SelectedDate.ToString()),DateTime.Parse( DataLast.SelectedDate.ToString()));
+          txtMoney.Text= initial.SelectBySolid(dataBase.DBName,dataBase.ConnectionString, DateTime.Parse(DataFirst.SelectedDate.ToString()),DateTime.Parse( DataLast.SelectedDate.ToString()));
+          TxtDay.Text= initial.SelectByDay(dataBase.DBName, dataBase.ConnectionString, DateTime.Parse(DataFirst.SelectedDate.ToString()), DateTime.Parse(DataLast.SelectedDate.ToString()));
         }
     }
 }
