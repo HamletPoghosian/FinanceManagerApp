@@ -135,23 +135,25 @@ namespace FinanceManagerApp.FinancePro
             using (con = new SqlConnection(sqlconnection))
             {                
                  sqlQuerry.Append(@" use Finance
-SELECT      Wallet.Day           
-     FROM      Wallet 
-     GROUP BY Wallet.Day
-     ORDER BY Wallet.Day ");
+SELECT      Wallet.Day,
+    COUNT(Wallet.Day) AS TopWallet
+    FROM      Wallet 
+    GROUP BY Wallet.Day
+    ORDER BY TopWallet DESC
+ ");
                 con.OpenAsync().Wait();
-                string BuyValue = string.Empty;
+                DateTime BuyValue=DateTime.Now;
                 using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
                 {
                     SqlDataReader rd = com.ExecuteReader();
 
                     while (rd.Read())
                     {
-                        BuyValue = rd[0].ToString();
+                        BuyValue = DateTime.Parse( rd[0].ToString());
                         break;
                     }
                     con.Close();
-                    return BuyValue;
+                    return BuyValue.ToString("MM/dd/yyyy");
                 };
             };
         }
