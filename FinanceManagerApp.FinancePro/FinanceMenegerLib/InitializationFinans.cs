@@ -100,14 +100,20 @@ namespace FinanceManagerApp.FinancePro
 
         public List<string> SelectBuy(string dbName, string sqlconnection,DateTime dataFirst,DateTime dataLast)
         {
+            StringBuilder sqlQuerry = new StringBuilder();
             using (con = new SqlConnection(sqlconnection))
             {
-                string sqlQuerry = @"use Finance
+                 sqlQuerry.Append( @"use Finance
                                     select sum(Amount)
                                     from  Wallet 
-                                    where Wallet.Day between '"+dataFirst+ "'AND '"+ dataLast +"'";
+                                    where Wallet.Day between '"+dataFirst+ "'AND '"+ dataLast +"'" );
+               
+                sqlQuerry.Append(@" SELECT      Wallet.Day           
+    FROM      Wallet 
+    GROUP BY Wallet.Day
+    ORDER BY Wallet.Day ");
                 con.OpenAsync().Wait();
-                using (SqlCommand com = new SqlCommand(sqlQuerry, con))
+                using (SqlCommand com = new SqlCommand(sqlQuerry.ToString(), con))
                 {
                     SqlDataReader rd = com.ExecuteReader();
                     List<string> BuyValue = new List<string>();
@@ -115,6 +121,8 @@ namespace FinanceManagerApp.FinancePro
                     while (rd.Read())
                     {
                         BuyValue.Add(rd["Amount"].ToString());
+                        BuyValue.Add(rd["Day"].ToString());
+                        break;
                     }
                     con.Close();
                     return BuyValue;

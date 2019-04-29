@@ -23,8 +23,8 @@
         <Calendar x:Name="Calendar" HorizontalAlignment="Left" Height="164" Margin="0,361,0,0" VerticalAlignment="Top" Width="175" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Today}"/>
         <TextBox x:Name="textCalendar" Text="{Binding ElementName=Calendar,Path=SelectedDate,StringFormat=d}" Grid.Column="1" HorizontalAlignment="Left" Height="65" Margin="2,291,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="266"/>
         <Button x:Name="buttonSend" Content="Գրանցել" HorizontalAlignment="Left" Height="75" Margin="30,450,0,0" VerticalAlignment="Top" Width="175" FontSize="20" Click="ButtonSend_Click" Background="#FF73997E"/>
-        <DatePicker Grid.Column="2" HorizontalAlignment="Left" Margin="95,105,0,0" VerticalAlignment="Top" Width="135" Height="36"/>
-        <DatePicker Grid.Column="2" HorizontalAlignment="Left" Margin="280,105,0,0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.695,0.625" Height="36"/>
+        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}"  x:Name="DataFirst" Grid.Column="2" HorizontalAlignment="Left" Margin="95,105,0,0" VerticalAlignment="Top" Width="135" Height="36"/>
+        <DatePicker SelectedDate="{x:Static sys:DateTime.Now}" x:Name="DataLast" Grid.Column="2" HorizontalAlignment="Left" Margin="280,105,0,0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.695,0.625" Height="36"/>
         <Label Content="Կատարված Ծախսեր ըստ ժամանակահատվածի" Grid.Column="2" HorizontalAlignment="Left" Margin="95,26,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
         <Label Content="Սկսված                  Մինչև" Grid.Column="2" HorizontalAlignment="Left" Margin="95,68,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Content="Ամենաշատ կատարված գնումներ օրը-" Grid.Column="2" HorizontalAlignment="Left" Margin="95,166,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="1,1">
