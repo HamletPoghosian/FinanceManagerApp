@@ -18,23 +18,75 @@
         <Label  Grid.Column="0" Content="Մեկնաբանություն" HorizontalAlignment="Left" Margin="32,193,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,-0.596" FontSize="20" Height="37" Width="185"/>
         <Label  Grid.Column="0" Content="Գործարքի օրը" HorizontalAlignment="Left" Margin="32,278,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.491,1.811" Height="37" Width="150"/>
         <TextBox x:Name="textnumber"   HorizontalAlignment="Left" Height="44" Margin="0,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="264" RenderTransformOrigin="1.89,0.455" Grid.Column="1"/>
-        <ComboBox x:Name="comboType" HorizontalAlignment="Left" Height="36" Margin="0,122,0,0" VerticalAlignment="Top" Width="264" Grid.Column="1" SelectionChanged="ComboType_SelectionChanged"/>
+        <ComboBox x:Name="comboType" HorizontalAlignment="Left" Height="36" Margin="0,122,0,0" VerticalAlignment="Top" Width="264" Grid.Column="1" SelectionChanged="ComboType_SelectionChanged" BorderBrush="#FF73997E" Background="#FF73997E"/>
         <TextBox x:Name="textComment"  HorizontalAlignment="Left" Height="80" Margin="2,193,0,0" TextWrapping="Wrap" Text="Մեկնաբանություն" VerticalAlignment="Top" Width="264" Grid.Column="1"/>
         <Calendar x:Name="Calendar" HorizontalAlignment="Left" Height="164" Margin="0,361,0,0" VerticalAlignment="Top" Width="175" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Today}"/>
         <TextBox x:Name="textCalendar" Text="{Binding ElementName=Calendar,Path=SelectedDate,StringFormat=d}" Grid.Column="1" HorizontalAlignment="Left" Height="65" Margin="2,291,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="266"/>
-        <Button x:Name="buttonSend" Content="Գրանցել" HorizontalAlignment="Left" Height="75" Margin="30,450,0,0" VerticalAlignment="Top" Width="175" FontSize="20" Click="ButtonSend_Click"/>
-        <Expander x:Name="expendGraf" Grid.Column="2" Header="Վիճակագրություն Գրաֆիկ ըստ ծախսերի&#xD;&#xA;" Height="101" Margin="10,35,231,0" VerticalAlignment="Top" FontSize="20">
-            <Grid Background="#FFE5E5E5" Margin="0,0,-222,0" Height="214">
-                <Canvas x:Name="CanvasGraf" HorizontalAlignment="Left" Height="194" Margin="10,10,0,0" VerticalAlignment="Top" Width="580"/>
-            </Grid>
-        </Expander>
-        <Expander Grid.Column="2" Header="Վիճակագրություն ըստ Տվյալների" HorizontalAlignment="Left" Height="100" Margin="10,291,0,0" VerticalAlignment="Top" Width="656" FontSize="20">
-            <Grid Background="#FFE5E5E5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="59*"/>
-                    <ColumnDefinition Width="595*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </Expander>
+        <Button x:Name="buttonSend" Content="Գրանցել" HorizontalAlignment="Left" Height="75" Margin="30,450,0,0" VerticalAlignment="Top" Width="175" FontSize="20" Click="ButtonSend_Click" Background="#FF73997E"/>
+        <DatePicker Grid.Column="2" HorizontalAlignment="Left" Margin="95,105,0,0" VerticalAlignment="Top" Width="135" Height="36"/>
+        <DatePicker Grid.Column="2" HorizontalAlignment="Left" Margin="280,105,0,0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.695,0.625" Height="36"/>
+        <Label Content="Կատարված Ծախսեր ըստ ժամանակահատվածի" Grid.Column="2" HorizontalAlignment="Left" Margin="95,26,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Սկսված                  Մինչև" Grid.Column="2" HorizontalAlignment="Left" Margin="95,68,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="Ամենաշատ կատարված գնումներ օրը-" Grid.Column="2" HorizontalAlignment="Left" Margin="95,166,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="1,1">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="0.95"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-20"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Height="43" Margin="481,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" FontSize="20" Text="Օր" RenderTransformOrigin="1,1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="0.95"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-20"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Label Content="Ամենաշատ գնումների տեսակը-" Grid.Column="2" HorizontalAlignment="Left" Margin="100,210,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="1,1">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="0.95"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-20"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Height="49" Margin="413,215,0,0" TextWrapping="Wrap" Text="Տեսակ" VerticalAlignment="Top" Width="242" FontSize="20" RenderTransformOrigin="1,1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="0.95"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-20"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Label Content="Ծախսված գումարը-" Grid.Column="2" HorizontalAlignment="Left" Margin="109,253,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="1,1">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="0.95"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-20"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Height="49" Margin="305,256,0,0" TextWrapping="Wrap" Text="Գումար" VerticalAlignment="Top" Width="275" FontSize="20" RenderTransformOrigin="1,1">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="0.95"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform X="-20"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Button Content="Փնտրել" Grid.Column="2" HorizontalAlignment="Left" Height="40" Margin="453,101,0,0" VerticalAlignment="Top" Width="153" FontSize="20"/>
     </Grid>
 </Window>
