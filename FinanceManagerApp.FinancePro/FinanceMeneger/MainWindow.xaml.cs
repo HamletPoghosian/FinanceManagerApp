@@ -31,8 +31,8 @@ namespace FinanceMeneger
             dataBase.CreateDB().Wait();
             dataBase.CreateTable().Wait();
             comboType.ItemsSource = initial.SelectCategory(dataBase.DBName, dataBase.ConnectionString);
-            ItemCollection it = comboType.Items;
-          if( it.Count<1)
+            
+          if(comboType.Items.Count<1)
             {
                
                 
