@@ -97,6 +97,30 @@ namespace FinanceManagerApp.FinancePro
                 };
             };
         }
+
+        public List<string> SelectBuy(string dbName, string sqlconnection,DateTime dataFirst,DateTime dataLast)
+        {
+            using (con = new SqlConnection(sqlconnection))
+            {
+                string sqlQuerry = @"use Finance
+                                    select sum(Amount)
+                                    from  Wallet 
+                                    where Wallet.Day between '"+dataFirst+ "'AND '"+ dataLast +"'";
+                con.OpenAsync().Wait();
+                using (SqlCommand com = new SqlCommand(sqlQuerry, con))
+                {
+                    SqlDataReader rd = com.ExecuteReader();
+                    List<string> BuyValue = new List<string>();
+
+                    while (rd.Read())
+                    {
+                        BuyValue.Add(rd["Amount"].ToString());
+                    }
+                    con.Close();
+                    return BuyValue;
+                };
+            };
+        }
     }
 }
 

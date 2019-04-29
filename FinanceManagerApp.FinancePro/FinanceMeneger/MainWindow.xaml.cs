@@ -31,11 +31,8 @@ namespace FinanceMeneger
             dataBase.CreateDB().Wait();
             dataBase.CreateTable().Wait();
             comboType.ItemsSource = initial.SelectCategory(dataBase.DBName, dataBase.ConnectionString);
-            
-          if(comboType.Items.Count<1)
+            if (comboType.Items.Count < 1)
             {
-               
-                
                 initial.InsertCategories(dataBase.DBName, dataBase.ConnectionString);
                 comboType.ItemsSource = initial.SelectCategory(dataBase.DBName, dataBase.ConnectionString);
             }
@@ -57,13 +54,18 @@ namespace FinanceMeneger
             initial = new InitializationFinans();
             try
             {
-            initial.InsertWallet(dataBase.DBName, dataBase.ConnectionString,int.Parse(textnumber.Text), comboType.SelectedValue.ToString(), textComment.Text, DateTime.Parse(textCalendar.Text));
+                initial.InsertWallet(dataBase.DBName, dataBase.ConnectionString, int.Parse(textnumber.Text), comboType.SelectedValue.ToString(), textComment.Text, DateTime.Parse(textCalendar.Text));
                 MessageBox.Show("Տվյալները հաջողությամբ գրանցվեցին");
             }
             catch (Exception)
             {
-             MessageBox.Show("Տվյալները  չեն գրանցվել ");
+                MessageBox.Show("Տվյալները  չեն գրանցվել ");
             }
+
+        }
+
+        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
